@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopapp/widgets/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
   final String? id;
@@ -7,25 +8,33 @@ class ProductItem extends StatelessWidget {
   ProductItem(this.id, this.title, this.imageUrl);
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-      child: Image.network(
-        imageUrl!,
-        fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: GridTile(
+        child: GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(ProductDetailScreen.routename, arguments: id);
+            },
+            child: Image.network(
+              imageUrl!,
+              fit: BoxFit.cover,
+            )),
+        footer: GridTileBar(
+            leading: IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {},
+                color: Theme.of(context).accentColor),
+            backgroundColor: Colors.black45,
+            title: Text(
+              title!,
+              textAlign: TextAlign.center,
+            ),
+            trailing: IconButton(
+                icon: Icon(Icons.shopping_cart_sharp),
+                onPressed: () {},
+                color: Theme.of(context).accentColor)),
       ),
-      footer: GridTileBar(
-          leading: IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
-          ),
-          backgroundColor: Colors.black45,
-          title: Text(
-            title!,
-            textAlign: TextAlign.center,
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.shopping_cart_sharp),
-            onPressed: () {},
-          )),
     );
   }
 }
