@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopapp/models/product.dart';
+import 'package:shopapp/providers/product.dart';
 
 class Products with ChangeNotifier {
   //_items bcz -items need to be private i.e. cannot be accessed from outside.
