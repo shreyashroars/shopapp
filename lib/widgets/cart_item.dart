@@ -23,6 +23,26 @@ class CartItem extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
           alignment: Alignment.centerLeft),
       direction: DismissDirection.startToEnd,
+      confirmDismiss: (direction) {
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: const Text('Are you Sure?'),
+                  content: const Text('Do u really want to delete the item?'),
+                  actions: [
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(false);
+                        },
+                        child: const Text('No')),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop(true);
+                        },
+                        child: const Text('Yes')),
+                  ],
+                ));
+      },
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId!);
       },
